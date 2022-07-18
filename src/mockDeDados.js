@@ -1,43 +1,51 @@
+import Planeta1 from "./Components/imagens/planeta1.jpg"
+import Planeta2 from "./Components/imagens/planeta2.jpg"
+import Planeta3 from "./Components/imagens/planeta3.jpg"
+import Planeta4 from "./Components/imagens/planeta4.jpg"
+import Planeta5 from "./Components/imagens/planeta5.jpg"
+import Planeta6 from "./Components/imagens/planeta6.jpg"
+
+
 export const mockDeDados = [{
     id: 1,
-    name: 'Produto legal',
-    price: 123,
-    photo: 'https://picsum.photos/200/200?a=1',
+    name: 'Urano',
+    price: 15000,
+    photo: Planeta1,
     button: false
   },
   {
     id: 2,
-    name: 'Produto maneiro',
-    price: 200,
-    photo: 'https://picsum.photos/200/200?a=1',
+    name: 'Plutão',
+    price: 5000,
+    photo:Planeta2,
     button: false,
   },
   {
     id: 3,
-    name: 'Produto bacana',
-    price: 90,
-    photo: 'https://picsum.photos/200/200?a=1',
+    name: 'Saturno',
+    price: 10000,
+    photo: Planeta3,
     button: false,
   },
   {
     id: 4,
-    name: 'Produto massa',
-    price: 199,
-    photo: 'https://picsum.photos/200/200?a=1',
+    name: 'Jupiter',
+    price: 20000,
+    photo: Planeta4,
     button: false,
   },
   {
     id: 5,
-    name: 'Produto bonito',
-    price: 299,
-    photo: 'https://picsum.photos/200/200?a=1',
+    name: 'Jupiter',
+    price: 15000,
+    photo: Planeta5,
     button: false,
   },
   {
     id: 6,
-    name: 'Produto inspirador',
-    price: 99,
-    photo: 'https://picsum.photos/200/200?a=1',
+    name: 'Mercurio',
+    price: 10000,
+    photo: Planeta6,
     button: false,
     },
   ] 

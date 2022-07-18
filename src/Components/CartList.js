@@ -1,9 +1,10 @@
 import React from "react";
-
+import {Carrinho} from "../style"
 
 const Cart = (props) => {
 
-    return (<>
+    return (
+    <Carrinho>
         <table>
             <tr>
                 <th>
@@ -27,8 +28,8 @@ const Cart = (props) => {
                 <td>Valor total:{props.valorTotal}</td>
             </tr>
             </table>
-       </>
+    </Carrinho>
     )
 }
 
-export default Cart
+export default Cart;
