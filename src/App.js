@@ -20,11 +20,12 @@ function App() {
   const [maxValue, setMaxValue] = useState("")
   
   const produtoFiltrado = busca.filter((item, index) => {
-    return item.name.includes(inputUsuario) && item.price <= maxValue && item.price >= minValue;
-    //item.name.includes(inputUsuario) 
-;
+    if (maxValue === "" && minValue === "") {
+      return item.name.includes(inputUsuario);
+    } else {
+      return item.name.includes(inputUsuario) && item.price >= minValue && item.price <= maxValue;
+    }
   });
-  console.log(produtoFiltrado);
   
     const handleInputName = (e) => {
       return setInputUsuario(e.target.value)
