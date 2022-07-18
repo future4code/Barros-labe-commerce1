@@ -12,7 +12,7 @@ const Card = (props) => {
                         <td>{props.name}</td>
                     </tr>
                     <tr>
-                        <td>{props.price}</td>
+                        <td>R${props.price},00</td>
                     </tr>
                 </table>
                 <AddButton onClick={props.onClick}>Adicionar produto</AddButton>
