@@ -1,25 +1,116 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Card from "./Components/Card";
+import { DivPai } from "./style";
+import { mockDeDados } from "./mockDeDados";
+import { useState } from "react";
+import Filtro from "./Components/filtro";
+import Cart from "./Components/CartList";
 
 function App() {
+  //Estado para armazenar o mock de dados
+  const [busca, setBusca] = useState(mockDeDados);
+
+  // Estado para armazenar o filtro de nome
+  const [inputUsuario, setInputUsuario] = useState("");
+  
+  // Estado para armazenar o filtro de valor mínimo
+  const [minValue, setMinValue] = useState("");
+   
+  // Estado para armazenar o filtro de valor máximo
+  const [maxValue, setMaxValue] = useState("");
+
+  // Estado para armazenar os produtos do carrinho
+  const [cartProduct, setCartProduct] = useState({});
+
+  //função para retornar os produtos filtrados
+  const produtoFiltrado = busca.filter((item, index) => {
+    if (maxValue === "" && minValue === "") {
+      return item.name.includes(inputUsuario);
+    } else {
+      return (
+        item.name.includes(inputUsuario) &&
+        item.price >= minValue &&
+        item.price <= maxValue
+      );
+    }
+
+  });
+
+  // Capturar o valor do input do nome do produto
+  const handleInputName = (e) => {
+    return setInputUsuario(e.target.value);
+  };
+   
+  // Capturar o valor do input valor mínimo
+  const handleInputMin = (e) => {
+    return setMinValue(e.target.value);
+  };
+
+  // Capturar o valor do input valor máximo
+  const handleInputMax = (e) => {
+    return setMaxValue(e.target.value);
+  };
+
+  // função callback para retornar os cards filtrados e adicionar os produtos clicados ao carrinho. OBS: Não funciona como o esperado.
+  function addCardCallback(element, index) {
+    const enviarProduto = (e) => {
+      e.preventDefault();
+      const novoproduto = [...produtoFiltrado];
+      // Designar o valor do indice clicado ao estado do carrinho.
+      setCartProduct(novoproduto[index]);
+      console.log(cartProduct);
+    };
+    return (
+      <Card
+        key={index}
+        ImgProduct={element.photo}
+        name={element.name}
+        price={element.price}
+        onClick={enviarProduto}
+      />
+    );
+  }
+
+  // Função callback para renderizar os produtos no carrinho
+  function addCartCallback(element, index, array) {
+    return (
+      <Cart quantidade={+1} nomeProduto={element.name} price={element.price} />
+    );
+  }
+
+  
+  const addCard = produtoFiltrado.map(addCardCallback);
+
+  const addCart = produtoFiltrado.map(addCartCallback);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DivPai>
+      <Filtro
+        label="Pesquisar por nome"
+        type="text"
+        inputValue={inputUsuario}
+        captureInput={handleInputName}
+      ></Filtro>
+      <Filtro
+        label="Pesquisar por valor minimo"
+        type="number"
+        inputValue={minValue}
+        captureInput={handleInputMin}
+      ></Filtro>
+      <Filtro
+        label="Pesquisar por valor máximo"
+        type="number"
+        inputValue={maxValue}
+        captureInput={handleInputMax}
+      ></Filtro>
+      {addCard}
+      <h2>Carrinho</h2>
+      {addCart}
+      <table>
+        <tr>
+          <td>Valor total:</td>
+        </tr>
+      </table>
+    </DivPai>
   );
 }
 
