@@ -1,5 +1,5 @@
 import Card from "./Components/Card";
-import { DivPai } from "./style";
+import { DivPai, Form  } from "./style";
 import { mockDeDados } from "./mockDeDados";
 import { useState } from "react";
 import Filtro from "./Components/filtro";
@@ -83,33 +83,22 @@ function App() {
   const addCart = produtoFiltrado.map(addCartCallback);
 
   return (
+
     <DivPai>
-      <Filtro
-        label="Pesquisar por nome"
-        type="text"
-        inputValue={inputUsuario}
-        captureInput={handleInputName}
-      ></Filtro>
-      <Filtro
-        label="Pesquisar por valor minimo"
-        type="number"
-        inputValue={minValue}
-        captureInput={handleInputMin}
-      ></Filtro>
-      <Filtro
-        label="Pesquisar por valor máximo"
-        type="number"
-        inputValue={maxValue}
-        captureInput={handleInputMax}
-      ></Filtro>
-      {addCard}
-      <h2>Carrinho</h2>
-      {addCart}
-      <table>
-        <tr>
-          <td>Valor total:</td>
-        </tr>
-      </table>
+
+      <Form>
+        <Filtro label="Pesquisar por nome" type="text" inputValue={inputUsuario} captureInput={handleInputName}></Filtro>
+        <Filtro label="Pesquisar por valor minimo" type="number" inputValue={minValue} captureInput={handleInputMin}></Filtro>
+        <Filtro label="Pesquisar por valor máximo" type="number" inputValue={maxValue} captureInput={handleInputMax}></Filtro>
+      </Form>
+      <section>
+        {addCard}
+      </section>
+
+      <div>
+        <Cart></Cart>
+      </div>
+
     </DivPai>
   );
 }

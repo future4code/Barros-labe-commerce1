@@ -5,7 +5,7 @@ export default function Filtro(props) {
 
   return (
     <div>
-        <h2>{props.label}</h2>
+        <h4>{props.label}</h4>
       <input
         type={props.type}
         value={props.inputValue}

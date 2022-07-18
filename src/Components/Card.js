@@ -15,6 +15,7 @@ const Card = (props) => {
                         <td>R${props.price},00</td>
                     </tr>
                 </table>
+                
                 <AddButton onClick={props.onClick}>Adicionar produto</AddButton>
             </div>
         </CardContainer>
