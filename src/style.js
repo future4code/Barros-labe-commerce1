@@ -3,6 +3,9 @@ import styled from 'styled-components'
 export const DivPai = styled.div `
     margin: 0;
     display: flex;
+    background: linear-gradient(to right, #2f9596, #b2aaaa);
+  
+   
 
 
     section{
@@ -10,6 +13,7 @@ export const DivPai = styled.div `
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 10px;
+        
     }
     
     
@@ -44,6 +48,13 @@ export const ProductImage = styled.img `
 export const AddButton  = styled.button `
     padding:10px;
     margin-left:60px;
+
+
+    button:hover{
+        padding: 15px;
+        color: white;
+        background-color: black;
+    }
     
 `
 
@@ -61,3 +72,4 @@ export const Carrinho=styled.div`
         margin-top: 50px;
     }
 `
+

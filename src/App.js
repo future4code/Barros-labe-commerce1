@@ -5,6 +5,7 @@ import { useState } from "react";
 import Filtro from "./Components/filtro";
 import Cart from "./Components/CartList";
 
+
 function App() {
   //Estado para armazenar o mock de dados
   const [busca, setBusca] = useState(mockDeDados);
@@ -84,19 +85,26 @@ function App() {
 
   return (
     <DivPai>
-      <h1> CONFLITO</h1>
-
+      
+      
       <Form>
+        <h3>Filtro</h3>
         <Filtro label="Pesquisar por nome" type="text" inputValue={inputUsuario} captureInput={handleInputName}></Filtro>
         <Filtro label="Pesquisar por valor minimo" type="number" inputValue={minValue} captureInput={handleInputMin}></Filtro>
         <Filtro label="Pesquisar por valor máximo" type="number" inputValue={maxValue} captureInput={handleInputMax}></Filtro>
       </Form>
+
+      
+      
       <section>
         {addCard}
+     
       </section>
 
       <div>
-        <Cart></Cart>
+          <h3>Carrinho</h3>
+        <Cart>
+        </Cart>
       </div>
 
     </DivPai>
