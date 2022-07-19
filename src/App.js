@@ -83,8 +83,8 @@ function App() {
   const addCart = produtoFiltrado.map(addCartCallback);
 
   return (
-
     <DivPai>
+      <h1> CONFLITO</h1>
 
       <Form>
         <Filtro label="Pesquisar por nome" type="text" inputValue={inputUsuario} captureInput={handleInputName}></Filtro>
