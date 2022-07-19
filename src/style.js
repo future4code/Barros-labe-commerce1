@@ -73,3 +73,15 @@ export const Carrinho=styled.div`
     }
 `
 
+export const Select=styled.div`
+        margin: 26px;
+        width: 100%;
+        display: flex;
+        
+
+        select{
+            width: 150px;
+            padding: 5px;
+        }
+
+`
