@@ -1,10 +1,13 @@
 import React from "react";
 import { AddButton, CardContainer, ProductImage } from "../style";
 
+
+
 const Card = (props) => {
 
     return (
         <CardContainer>
+            
             <div>
                 <ProductImage src={props.ImgProduct} alt="Imagem do produto"/>
                 <table>
@@ -18,6 +21,7 @@ const Card = (props) => {
                 
                 <AddButton onClick={props.onClick}>Adicionar produto</AddButton>
             </div>
+            
         </CardContainer>
 
     )

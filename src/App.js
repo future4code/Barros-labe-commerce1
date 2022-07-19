@@ -4,6 +4,8 @@ import { mockDeDados } from "./mockDeDados";
 import { useState } from "react";
 import Filtro from "./Components/filtro";
 import Cart from "./Components/CartList";
+import Ordenado from "./Components/Ordenado";
+
 
 function App() {
   //Estado para armazenar o mock de dados
@@ -82,21 +84,43 @@ function App() {
 
   const addCart = produtoFiltrado.map(addCartCallback);
 
+
+  // const [parametro,setParametro]=useState("name")
+   // <Ordenado>
+  //   {parametro.sort((item,index)=>{
+  //     switch(parametro){
+  //       case "name":
+  //       return item.name - index.name
+  //     }
+  //   })}
+  // </Ordenado>
   return (
     <DivPai>
-      <h1> CONFLITO</h1>
-
+      
+      
       <Form>
-        <Filtro label="Pesquisar por nome" type="text" inputValue={inputUsuario} captureInput={handleInputName}></Filtro>
-        <Filtro label="Pesquisar por valor minimo" type="number" inputValue={minValue} captureInput={handleInputMin}></Filtro>
-        <Filtro label="Pesquisar por valor máximo" type="number" inputValue={maxValue} captureInput={handleInputMax}></Filtro>
+        <h3>Filtro</h3>
+        <Filtro label="Nome" type="text" inputValue={inputUsuario} captureInput={handleInputName}></Filtro>
+        <Filtro label="Valor minimo" type="number" inputValue={minValue} captureInput={handleInputMin}></Filtro>
+        <Filtro label="Valor máximo" type="number" inputValue={maxValue} captureInput={handleInputMax}></Filtro>
       </Form>
+
+      
+      
       <section>
         {addCard}
+     
       </section>
 
       <div>
-        <Cart></Cart>
+        <Ordenado
+         //  parametro={parametro} 
+         //  setParametro={setParametro}
+        ></Ordenado>
+       
+          <h3>Carrinho</h3>
+        <Cart>
+        </Cart>
       </div>
 
     </DivPai>
