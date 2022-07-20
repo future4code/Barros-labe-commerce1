@@ -11,8 +11,10 @@ export default function Ordenado(props) {
       <select 
       value={props.parametro}
       onChange={ev=>{props.setParametro(ev.target.value)}}>
-        <option value={"price"}>Crescente</option>
-        <option value={"price"}>Decrescente</option>
+        <option value={"nenhum"}>Nenhum</option>
+        <option value={"priceAsc"}>Crescente</option>
+        <option value={"priceDesc"}>Decrescente</option>
+        <option value={"alfabetica"}>De A à Z</option>
       </select>
 
     </Select>

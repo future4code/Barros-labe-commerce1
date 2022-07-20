@@ -1,11 +1,10 @@
 import Card from "./Components/Card";
-import { DivPai, Form  } from "./style";
+import { DivPai, Form } from "./style";
 import { mockDeDados } from "./mockDeDados";
 import { useState } from "react";
 import Filtro from "./Components/filtro";
 import Cart from "./Components/CartList";
 import Ordenado from "./Components/Ordenado";
-
 
 function App() {
   //Estado para armazenar o mock de dados
@@ -13,35 +12,46 @@ function App() {
 
   // Estado para armazenar o filtro de nome
   const [inputUsuario, setInputUsuario] = useState("");
-  
+
   // Estado para armazenar o filtro de valor mínimo
   const [minValue, setMinValue] = useState("");
-   
+
   // Estado para armazenar o filtro de valor máximo
   const [maxValue, setMaxValue] = useState("");
 
   // Estado para armazenar os produtos do carrinho
-  const [cartProduct, setCartProduct] = useState({});
+  const [cartProduct, setCartProduct] = useState([]);
+
+  const [parametro, setParametro] = useState();
 
   //função para retornar os produtos filtrados
   const produtoFiltrado = busca.filter((item, index) => {
     if (maxValue === "" && minValue === "") {
       return item.name.includes(inputUsuario);
+    } else if (maxValue === "") {
+      return (
+        item.name.includes(inputUsuario) &&
+        item.price >= minValue 
+      );
+    }else if (minValue === "") { 
+      return (
+        item.name.includes(inputUsuario) &&
+        item.price <= maxValue 
+      )
     } else {
       return (
         item.name.includes(inputUsuario) &&
         item.price >= minValue &&
         item.price <= maxValue
-      );
+      )
     }
-
   });
 
   // Capturar o valor do input do nome do produto
   const handleInputName = (e) => {
     return setInputUsuario(e.target.value);
   };
-   
+
   // Capturar o valor do input valor mínimo
   const handleInputMin = (e) => {
     return setMinValue(e.target.value);
@@ -54,20 +64,21 @@ function App() {
 
   // função callback para retornar os cards filtrados e adicionar os produtos clicados ao carrinho. OBS: Não funciona como o esperado.
   function addCardCallback(element, index) {
-    const enviarProduto = (e) => {
-      e.preventDefault();
-      const novoproduto = [...produtoFiltrado];
-      // Designar o valor do indice clicado ao estado do carrinho.
-      setCartProduct(novoproduto[index]);
-      console.log(cartProduct);
-    };
+    // const enviarProduto = (e) => {
+    //   e.preventDefault();
+    //   const novoproduto = [...produtoFiltrado];
+    //   // Designar o valor do indice clicado ao estado do carrinho.
+    //   setCartProduct(novoproduto[index]);
+    //   console.log(cartProduct);
+    // };
     return (
       <Card
         key={index}
         ImgProduct={element.photo}
         name={element.name}
         price={element.price}
-        onClick={enviarProduto}
+        setCartProduct={setCartProduct}
+        carrinhoAtual = {cartProduct}
       />
     );
   }
@@ -79,14 +90,35 @@ function App() {
     );
   }
 
-  
+  switch (parametro) {
+    case "priceAsc":
+      produtoFiltrado.sort(function (a, b) {
+        return a.price - b.price;
+      });
+      break;
+
+    case "priceDesc":
+      produtoFiltrado.sort(function (a, b) {
+        return b.price - a.price;
+      });
+      break;
+      //ainda não funciona em ordem alfabética
+    case "alfabetica":
+      produtoFiltrado.sort(function(a,b) {
+        if (a.nome < b.nome)
+           return -1;
+        if (a.nome > b.nome)
+          return 1;
+        return 0;
+      });
+  }
+
   const addCard = produtoFiltrado.map(addCardCallback);
 
-  const addCart = produtoFiltrado.map(addCartCallback);
-
+  const addCart = cartProduct.map(addCartCallback);
 
   // const [parametro,setParametro]=useState("name")
-   // <Ordenado>
+  // <Ordenado>
   //   {parametro.sort((item,index)=>{
   //     switch(parametro){
   //       case "name":
@@ -96,33 +128,40 @@ function App() {
   // </Ordenado>
   return (
     <DivPai>
-      
-      
       <Form>
         <h3>Filtro</h3>
-        <Filtro label="Nome" type="text" inputValue={inputUsuario} captureInput={handleInputName}></Filtro>
-        <Filtro label="Valor minimo" type="number" inputValue={minValue} captureInput={handleInputMin}></Filtro>
-        <Filtro label="Valor máximo" type="number" inputValue={maxValue} captureInput={handleInputMax}></Filtro>
+        <Filtro
+          label="Nome"
+          type="text"
+          inputValue={inputUsuario}
+          captureInput={handleInputName}
+        ></Filtro>
+        <Filtro
+          label="Valor minimo"
+          type="number"
+          inputValue={minValue}
+          captureInput={handleInputMin}
+        ></Filtro>
+        <Filtro
+          label="Valor máximo"
+          type="number"
+          inputValue={maxValue}
+          captureInput={handleInputMax}
+        ></Filtro>
       </Form>
 
-      
-      
-      <section>
-        {addCard}
-     
-      </section>
+      <section>{addCard}</section>
 
       <div>
         <Ordenado
-         //  parametro={parametro} 
-         //  setParametro={setParametro}
+          //  parametro={parametro}
+          //  setParametro={setParametro}
+          setParametro={setParametro}
         ></Ordenado>
-       
-          <h3>Carrinho</h3>
-        <Cart>
-        </Cart>
-      </div>
 
+        <h3>Carrinho</h3>
+        {addCart}
+      </div>
     </DivPai>
   );
 }
