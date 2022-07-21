@@ -76,10 +76,11 @@ function App() {
     );
   }
 
-  // Função callback para renderizar os produtos no carrinho
+  // Função callback para renderizar os produtos no carrinho e excluir
   function addCartCallback(element, index, array) {
     return (
-      <Cart quantidade={+1} nomeProduto={element.name} price={element.price} />
+      <Cart quantidade={+1} nomeProduto={element.name} price={element.price} 
+      removerCarrinho={()=>{apagarCarrinho(element)}} />
     );
   }
 
@@ -104,6 +105,17 @@ function App() {
           return 1;
         return 0;
       });
+  }
+
+    //Apagar produto carrinho
+  const apagarCarrinho=(indexApagar)=>{
+    console.log(indexApagar)
+    const arrayAtual=cartProduct.filter((item, )=>{
+      if ( item.name !== indexApagar.name){
+          return indexApagar
+      }
+    })
+      setCartProduct(arrayAtual)
   }
 
   const addCard = produtoFiltrado.map(addCardCallback);
