@@ -64,13 +64,6 @@ function App() {
 
   // função callback para retornar os cards filtrados e adicionar os produtos clicados ao carrinho. OBS: Não funciona como o esperado.
   function addCardCallback(element, index) {
-    // const enviarProduto = (e) => {
-    //   e.preventDefault();
-    //   const novoproduto = [...produtoFiltrado];
-    //   // Designar o valor do indice clicado ao estado do carrinho.
-    //   setCartProduct(novoproduto[index]);
-    //   console.log(cartProduct);
-    // };
     return (
       <Card
         key={index}
@@ -83,10 +76,11 @@ function App() {
     );
   }
 
-  // Função callback para renderizar os produtos no carrinho
+  // Função callback para renderizar os produtos no carrinho e excluir
   function addCartCallback(element, index, array) {
     return (
-      <Cart quantidade={+1} nomeProduto={element.name} price={element.price} />
+      <Cart quantidade={+1} nomeProduto={element.name} price={element.price} 
+      removerCarrinho={()=>{apagarCarrinho(element)}} />
     );
   }
 
@@ -113,19 +107,22 @@ function App() {
       });
   }
 
+    //Apagar produto carrinho
+  const apagarCarrinho=(indexApagar)=>{
+    console.log(indexApagar)
+    const arrayAtual=cartProduct.filter((item, )=>{
+      if ( item.name !== indexApagar.name){
+          return indexApagar
+      }
+    })
+      setCartProduct(arrayAtual)
+  }
+
   const addCard = produtoFiltrado.map(addCardCallback);
 
   const addCart = cartProduct.map(addCartCallback);
 
-  // const [parametro,setParametro]=useState("name")
-  // <Ordenado>
-  //   {parametro.sort((item,index)=>{
-  //     switch(parametro){
-  //       case "name":
-  //       return item.name - index.name
-  //     }
-  //   })}
-  // </Ordenado>
+  
   return (
     <DivPai>
       <Form>
@@ -154,8 +151,6 @@ function App() {
 
       <div>
         <Ordenado
-          //  parametro={parametro}
-          //  setParametro={setParametro}
           setParametro={setParametro}
         ></Ordenado>
 
